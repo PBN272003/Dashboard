@@ -890,8 +890,9 @@ GRID MAIN LAYOUT*
 }
 
 .grid-2 {
+  margin-bottom: 150px;
   grid-area: traffic;
-  padding: 7rem 0 2.5rem 0;
+  /* padding: 7rem 0 2.5rem 0; */
 }
 @media (min-width: 768px) {
   .grid-2 {
@@ -1010,6 +1011,7 @@ GRID MAIN LAYOUT*
 }
 
 .grid-10 {
+  margin-bottom:10rem;
   grid-area: footer;
   text-align: center;
   margin-top: 7.5rem;
