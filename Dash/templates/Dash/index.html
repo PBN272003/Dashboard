@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naik's Dashboard</title>
+    <link rel="stylesheet" href="{% static 'Dash/css/styles.css' %}">
+</head>
+
+<body>
+    <div class="container" id="top">
+        <header>
+            <img class="logo" src="{% static 'Dash/icons/logo.png' %}" alt="logo">
+            <div class="header-nav">
+                <div class="notification">
+                    <img class="bell" id="js-bell" src="{% static 'Dash/icons/icon-bell.svg' %}" alt="bell">
+                    <p class="badge" id="badge-1"><strong class="badge-num">1</strong></p>
+                    <p class="badge" id="badge-2"><strong class="badge-num">2</strong></p>
+                    <p class="badge" id="badge-3"><strong class="badge-num">3</strong></p>
+                    <p class="badge" id="badge-4"><strong class="badge-num">4</strong></p>
+                    <ul class="notification-menu" id="notif-menu" style="display: none;">
+                        <li id="header-li"><strong>Notifications</strong></li>
+                        <li class="popuptext" id="li-1">
+                            <img class="img" src="images/member-1.jpg" alt="member image">
+                            <h3 class="name">Priyank Naik</h3>
+                            <p class="comment">What are your plans for tonight?</p>
+                            <button class="btn-notif" type="button" name="delete">X</button>
+                        </li>
+                        <li class="popuptext" id="li-2">
+                            <img class="img" src="images/member-2.jpg" alt="member image">
+                            <h3 class="name">Dale Byrd</h3>
+                            <p class="comment">Hey what's up?</p>
+                            <button class="btn-notif" type="button" name="delete">X</button>
+                        </li>
+                        <li class="popuptext" id="li-3">
+                            <img class="img" src="images/member-3.jpg" alt="member image">
+                            <h3 class="name">Dawn Wood</h3>
+                            <p class="comment">Just sent you a voice message</p>
+                            <button class="btn-notif" type="button" name="delete">X</button>
+                        </li>
+                        <li class="popuptext" id="li-4">
+                            <img class="img" src="images/member-4.jpg" alt="member image">
+                            <h3 class="name">Dan Oliver</h3>
+                            <p class="comment">Are you going to the game next week?</p>
+                            <button class="btn-notif" type="button" name="delete">X</button>
+                        </li>
+                        <li class="popuptext popupalert" id="alert-bell" style="display: none;">
+                            <h3>No new notifications</h3>
+                        </li>
+                    </ul>
+                </div>
+                <span class="border-notif"></span>
+                <img class="profile-pic" src="{% static 'Dash/images/priyank.jpeg' %}" alt="User Avatar">
+                <h3 class="profile-name">Priyank Naik</h3>
+            </div>
+        </header>
+        <nav>
+            <div class="side-nav" id="js-nav">
+                <a href="#top" class="nav-icons nav-selected" id="btn-top"><img src="{% static 'Dash/icons/icon-dashboard.svg' %}" alt="dashboard"></a>
+                <a href="#traffic" class="nav-icons" id="btn-traffic"><img src="{% static 'Dash/icons/icon-visits.svg' %}" alt="visits"></a>
+                <a href="#activity" class="nav-icons" id="btn-activity"><img src="{% static 'Dash/icons/icon-members.svg' %}" alt="members"></a>
+                <a href="#settings" class="nav-icons" id="btn-settings"><img src="{% static 'Dash/icons/icon-settings.svg' %}" alt="settings"></a>
+            </div>
+        </nav>
+        <main class="grid-main">
+
+            <div class="grid-1">
+                <div class="dashboard-flex">
+                    <h2 class="dashboard">Dashboard</h2>
+                    <form class="search-border" action="index.html" method="POST">
+                        <input type="search" class="search-top" id="search-top" placeholder="Search">
+                    </form>
+                </div>
+                <div class="btn-delete-flex" id="js-alert">
+                    <p class="alert-text"><strong>Alert! </strong>You can hide me.</p>
+                    <button class="btn-delete" id="js-btn" type="button" name="delete"><strong>x</strong></button>
+                </div>
+
+            </div>
+
+            <div class="grid-2" id="traffic">
+                <h3>SECTORS</h3>
+                <ul class="btn-chart">
+                    <li class="li" id="intensityChart">Intensity</li>
+                    <li class="li" id="likelihoodChart">Likelihood</li>
+                    <li class="li" id="relevanceChart">Relevance</li>
+                    
+
+
+                </ul>
+                <div class="chart-1" style="position: relative; height:150px; width:800px">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+         
+          <!--  <div class="grid-3">
+                <h3>DAILY TRAFFIC</h3>
+                <div class="chart-2" style="position: relative; height:221px; width:979px">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid-4">
+                <h3>MOBILE USERS</h3>
+                <div class="chart-3" style="position: relative; height:221px; width:979px">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+        
+        
+            <div class="grid-5">
+                <h3>SOCIAL STATS</h3>
+                <div class="widgets">
+                    <div class="social-info">
+                        <svg class="social-icons" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 -2 70 30" x="0px" y="0px">
+                            <circle cx="15" cy="13" r="30.180" fill="#7377bf"/>
+                            <path fill="#fff" d="M32,3.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6C25.8,0.8,24,0,22.2,0
+	                      c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5C10.3,7.8,5.5,5.2,2.2,1.2c-0.6,1-0.9,2.1-0.9,3.3c0,2.3,1.2,4.3,2.9,5.5
+	                      c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1
+	                      c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,3,10.1,3c12.1,0,18.7-10,18.7-18.7
+	                      c0-0.3,0-0.6,0-0.8C30,5.6,31.1,4.4,32,3.1z" />
+                        </svg>
+                        <h2 class="widget-label">Twitter</h2>
+                        <p class="widget-stats">10,345</p>
+                    </div>
+                    <div class="social-info">
+                        <svg class="social-icons" version="1.1" viewBox="-18 15 95 30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
+                            <circle cx="30" cy="30" r="40.960" fill="#7377bf" />
+                            <path fill="#fff" d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029 
+                           c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77 
+                           L40.43,21.739z" />
+                        </svg>
+                        <h2 class="widget-label">Facebook</h2>
+                        <p class="widget-stats">8,739</p>
+                    </div>
+                   <div class="social-info">
+                    <svg class="social-icons" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px" y="0px" viewBox="-18 0 65 30" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                        <circle cx="15" cy="15" r="28.017" fill="#7377bf" />
+                        <path fill="#fff" d="M17.7,25.7c0-0.3,0-0.5-0.1-0.8c-0.1-0.2-0.1-0.5-0.2-0.7c-0.1-0.2-0.2-0.4-0.3-0.7c-0.2-0.2-0.3-0.4-0.4-0.6
+	                       c-0.1-0.2-0.3-0.3-0.5-0.6c-0.2-0.2-0.4-0.4-0.5-0.5c-0.1-0.1-0.3-0.3-0.6-0.5c-0.3-0.2-0.5-0.4-0.6-0.4s-0.3-0.2-0.6-0.4
+	                       c-0.3-0.2-0.5-0.4-0.6-0.4c-0.2,0-0.5,0-1,0c-0.7,0-1.4,0-2,0.1c-0.7,0.1-1.4,0.2-2.1,0.5c-0.7,0.2-1.3,0.5-1.9,0.9s-1,0.8-1.3,1.4
+	                       c-0.3,0.6-0.5,1.3-0.5,2.1c0,0.9,0.2,1.7,0.7,2.3c0.5,0.7,1.1,1.2,1.8,1.6s1.5,0.7,2.3,0.9s1.6,0.3,2.4,0.3c0.8,0,1.5-0.1,2.2-0.2
+	                       c0.7-0.2,1.3-0.4,1.9-0.8c0.6-0.3,1.1-0.8,1.4-1.4C17.5,27.2,17.7,26.5,17.7,25.7z M15.4,9.1c0-0.8-0.1-1.6-0.3-2.5
+	                       c-0.2-0.9-0.5-1.7-0.9-2.5c-0.4-0.8-0.9-1.5-1.6-2c-0.7-0.5-1.5-0.8-2.3-0.8c-1.2,0-2.1,0.4-2.8,1.3c-0.7,0.9-1,1.9-1,3.2
+	                       c0,0.6,0.1,1.2,0.2,1.9c0.1,0.7,0.4,1.3,0.7,2c0.3,0.7,0.7,1.3,1.1,1.8c0.4,0.5,0.9,1,1.5,1.3c0.6,0.3,1.2,0.5,1.9,0.5
+	                       c1.2,0,2.1-0.4,2.7-1.2C15.1,11.4,15.4,10.4,15.4,9.1z M12.9,0h8.4l-2.6,1.5h-2.6c0.9,0.6,1.6,1.4,2.1,2.4s0.8,2.1,0.8,3.2
+	                       c0,0.9-0.1,1.8-0.4,2.5c-0.3,0.7-0.7,1.3-1.1,1.8c-0.4,0.4-0.8,0.9-1.3,1.2c-0.4,0.4-0.8,0.8-1.1,1.2c-0.3,0.4-0.4,0.8-0.4,1.3
+	                       c0,0.3,0.1,0.7,0.3,1c0.2,0.3,0.5,0.6,0.8,0.9c0.3,0.3,0.7,0.6,1.1,0.9c0.4,0.3,0.8,0.7,1.2,1.1c0.4,0.4,0.8,0.8,1.1,1.3
+	                       c0.3,0.5,0.6,1,0.8,1.6c0.2,0.6,0.3,1.3,0.3,2c0,2.1-0.9,3.9-2.7,5.4c-1.9,1.7-4.6,2.5-8.1,2.5c-0.8,0-1.5-0.1-2.3-0.2
+	                       c-0.8-0.1-1.6-0.3-2.3-0.6c-0.8-0.3-1.5-0.7-2.1-1.1c-0.6-0.4-1.1-1-1.5-1.7C1,27.6,0.8,26.9,0.8,26c0-0.8,0.2-1.6,0.7-2.6
+	                       c0.4-0.8,1-1.5,1.8-2.1c0.8-0.6,1.8-1.1,2.8-1.4c1-0.3,2-0.5,3-0.7c0.9-0.1,1.9-0.2,2.9-0.3c-0.8-1.1-1.2-2-1.2-2.9
+	                       c0-0.2,0-0.3,0-0.5c0-0.1,0.1-0.3,0.1-0.4c0-0.1,0.1-0.2,0.2-0.4c0.1-0.2,0.1-0.3,0.1-0.4c-0.5,0.1-1,0.1-1.3,0.1
+	                       c-1.9,0-3.5-0.6-4.9-1.9c-1.4-1.3-2-2.8-2-4.7c0-1.8,0.6-3.4,1.8-4.8C6,1.7,7.5,0.8,9.3,0.4C10.5,0.1,11.7,0,12.9,0z M32.8,4.9v2.5
+	                       h-4.9v4.9h-2.5V7.4h-4.9V4.9h4.9V0h2.5v4.9H32.8z" />
+                    </svg>
+                    <h2 class="widget-label">Google+</h2>
+                    <p class="widget-stats">2,530</p>
+                    </div>
+
+                </div>
+            </div>
+        -->
+            <!-- 
+            <div class="grid-6" id="activity">
+                <h3>NEW MEMBERS</h3>
+                <div class="members-grid">
+                    <img class="member-img" src="images/member-1.jpg" alt="Member Avatar">
+                    <h3 class="member-name">Victoria Chambers</h3>
+                    <a class="member-mail">victoria.chambers80@example.com</a>
+                    <p class="member-date">11/01/19</p>
+                </div>
+                <div class="members-grid">
+                    <img class="member-img" src="images/member-2.jpg" alt="Member Avatar">
+                    <h3 class="member-name">Dale Byrd</h3>
+                    <a class="member-mail">dale.byrd52@example.com</a>
+                    <p class="member-date">10/01/19</p>
+                </div>
+                <div class="members-grid">
+                    <img class="member-img" src="images/member-3.jpg" alt="Member Avatar">
+                    <h3 class="member-name">Dawn Wood</h3>
+                    <a class="member-mail">dawn.wood16@example.com</a>
+                    <p class="member-date">10/01/19</p>
+                </div>
+                <div class="members-grid">
+                    <img class="member-img" src="images/member-4.jpg" alt="Member Avatar">
+                    <h3 class="member-name">Dan Oliver</h3>
+                    <a class="member-mail">dan.oliver82@example.com</a>
+                    <p class="member-date">10/01/19</p>
+                </div>
+
+            </div>
+
+            <div class="grid-7">
+                <h3>RECENT ACTIVITY</h3>
+                <div class="activity-grid">
+                    <img class="member-img" src="images/member-1.jpg" alt="Member Avatar">
+                    <p class="member-comment">Victoria Chambers commended on YourApp's SEO Tips</p>
+                    <h3 class="member-time">4 hours ago</h3>
+                    <p class="sign">&gt;</p>
+                </div>
+                <div class="activity-grid">
+                    <img class="member-img" src="images/member-2.jpg" alt="Member Avatar">
+                    <p class="member-comment">Dale Byrd like the post Facebook's Changes</p>
+                    <h3 class="member-time">5 hours ago</h3>
+                    <p class="sign">&gt;</p>
+                </div>
+                <div class="activity-grid">
+                    <img class="member-img" src="images/member-3.jpg" alt="Member Avatar">
+                    <p class="member-comment">Dawn Wood commended on Facebook's Changes</p>
+                    <h3 class="member-time">5 hours ago</h3>
+                    <p class="sign">&gt;</p>
+                </div>
+                <div class="activity-grid">
+                    <img class="member-img" src="images/member-4.jpg" alt="Member Avatar">
+                    <p class="member-comment">Dan Oliver posted YourApp's SEO Tips</p>
+                    <h3 class="member-time">1 day ago</h3>
+                    <p class="sign">&gt;</p>
+                </div>
+
+            </div>
+        -->
+            
+            <div class="grid-8">
+                <h3>MESSAGE USER</h3>
+                <form autocomplete="off" class="message-form" action="index.html" method="POST">
+                <div class="autocomplete">
+                    <input type="search" class="search-bottom" id="js-search-bottom" placeholder="Search for User">
+                </div>
+                    <textarea class="textarea" id="js-textarea" name="textarea" placeholder="Message User"></textarea>
+                    <button class="btn-send" id="js-send" type="button" name="send">SEND</button>
+                </form>
+            </div>
+
+            <div class="grid-9" id="settings">
+                <h3>SETTINGS</h3>
+                <form class="settings-form" action="index.html" method="POST">
+                    <p class="switch-1-text"> Send Email Notifications</p>
+                    <label class="switch switch-1">
+                        <input type="checkbox" id="checkbox1">
+                        <span class="slider round"></span>
+                      </label>
+                    <p class="switch-2-text"> Set Profile to Public</p>
+                    <label class="switch switch-2">
+                        <input type="checkbox" id="checkbox2" checked>
+                        <span class="slider round"></span>
+                      </label>
+                    <select class="timezone" name="timezone" id="js-timezone">
+                        <option value="" disabled selected>Select Timezone</option>
+                        <option id="option1">Northern Hemisphere</option>
+                        <option id="option2">Southern Hemisphere</option>
+                        <option id="option3">Eastern Hemisphere</option>
+                        <option id="option4">Western Hemisphere</option>
+                    </select>
+                    <button class="btn-save" id="js-save" type="button" value="save" onclick="save()">SAVE</button>
+                    <button class="btn-cancel" type="button"  onclick="cancel()">CANCEL</button>
+                </form>
+            </div>
+            
+            <footer class="grid-10">
+                <p>Developed by an Engineer</p>
+            </footer>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <script src="{% static 'Dash/script.js' %}"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const linechart = document.getElementById('lineChart').getContext('2d');
+            const sectors = ['Energy', 'Support Services', 'Financial Services', 'Manufacturing', 'Retail', 'Unknown'];
+            let currentChart = null;
+    
+            async function fetchData() {
+                const response = await fetch('/api/upload-data/'); // Replace with your actual URL
+                const data = await response.json();
+                return data;
+            }
+    
+            function getDataByMetric(data, metric) {
+                return sectors.map(sector => {
+                    const sectorData = data.find(item => item.sector === sector);
+                    return sectorData ? sectorData[metric] : null;
+                });
+            }
+    
+            function updateLineChart(metric, data) {
+                const metricData = getDataByMetric(data, metric);
+    
+                if (currentChart) {
+                    currentChart.destroy();
+                }
+    
+                currentChart = new Chart(linechart, {
+                    type: 'bar',
+                    data: {
+                        labels: sectors,
+                        datasets: [
+                            {
+                                label: metric,
+                                data: metricData,
+                                fill: false,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                            title: {
+                                display: true,
+                                text: `Line Chart: ${metric} by Sector`
+                            }
+                        }
+                    }
+                });
+            }
+    
+            fetchData().then(data => {
+                updateLineChart('intensity', data);
+    
+                document.getElementById('intensityChart').addEventListener('click', () => {
+                    updateLineChart('intensity', data);
+                });
+    
+                document.getElementById('likelihoodChart').addEventListener('click', () => {
+                    updateLineChart('likelihood', data);
+                });
+    
+                document.getElementById('relevanceChart').addEventListener('click', () => {
+                    updateLineChart('relevance', data);
+                });
+            });
+        });
+    </script>
+   
+</body>
+
+
+</html>
